@@ -80,3 +80,24 @@ rmdir /s /q "%LOCALAPPDATA%\宝塔网络代理修复"
 
 ### v1.0.0
 - 代理开启时自动维护宝塔面板地址的 Windows 代理例外
+
+## 维护与发布
+
+```cmd
+build.cmd        :: 编译到 bin\
+install.cmd      :: 装到本机并重启
+git add -A
+git commit -m "vX.Y.Z: 变更说明"
+git push
+```
+
+注意事项：
+
+- **换行**：`.cmd` / `.ps1` 由 `.gitattributes` 固定为 CRLF，改脚本后不要手动转换，
+  否则 cmd.exe 解析会掉每行首字符（历史故障）。
+- **编码**：`.cmd` 一律纯 ASCII；中文文案只放在 `.ps1`（UTF-8 + BOM）里，
+  避免 UTF-8/GBK 混用把变量名写成乱码。
+- **凭据**：HTTPS 推送，凭据存于 Windows 凭据管理器（`credential.helper=wincred`），
+  无需在仓库里保存任何密钥。
+- **网络**：直连 GitHub 需要梯子；仓库已配置 `http.proxy` 指向本机代理端口，
+  代理端口变化时用 `git config http.proxy http://127.0.0.1:<端口>` 更新。
