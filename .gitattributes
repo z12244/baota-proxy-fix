@@ -1,0 +1,7 @@
+# 批处理必须是 CRLF，否则 cmd.exe 解析会掉首字符
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+*.ini text eol=lf
+*.md  text eol=lf
+*.cs  text eol=lf
+*.exe binary
